@@ -1,21 +1,23 @@
 ﻿using System;
 using JARVIS.Knowledge;
 using JARVIS.Routing;
+using JARVIS;
+using JARVIS.Evaluation;
 
 namespace ExampleJARVIS.Objects
 {
     class LightSwitch : IEvaluatable, IPacketSender
     {
-        string identifier;
+        UniqueIdentifier identifier;
 
         bool state = false;
 
-        public LightSwitch(string identifier)
+        public LightSwitch(string name)
         {
-            this.identifier = identifier;
+           identifier = new UniqueIdentifier(name);
         }
 
-        public string Identifier
+        public UniqueIdentifier Identifier
         {
             get { return identifier; }
         }

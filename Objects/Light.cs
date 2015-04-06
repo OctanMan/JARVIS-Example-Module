@@ -2,21 +2,25 @@
 using System.Collections.Generic;
 using JARVIS.Knowledge;
 using JARVIS.Routing;
+using JARVIS;
+using JARVIS.Evaluation;
 
 namespace ExampleJARVIS.Objects
 {
     class Light  : IEvaluatable, IPacketReceiver
     {
-        string identifier;
+        UniqueIdentifier identifier;
+
+        WhatIBeInterestedIn[] interests = new WhatIBeInterestedIn[] { new TypeIBeInterestedIn(typeof(LightSwitch)) };
 
         byte brightness = 0;
 
-        public Light(string identifier)
+        public Light(string name)
         {
-            this.identifier = identifier;
+            identifier = new UniqueIdentifier("name");
         }
 
-        public string Identifier
+        public UniqueIdentifier Identifier
         {
             get { return identifier; }
         }
@@ -26,9 +30,9 @@ namespace ExampleJARVIS.Objects
             throw new System.NotImplementedException();
         }
 
-        public IEnumerable<Type> GetDesiredPacketType()
+        public IEnumerable<WhatIBeInterestedIn> GetDesiredPacketType()
         {
-            return new Type[] { typeof(LightSwitch) };
+            return interests;
         }
     }
 }
