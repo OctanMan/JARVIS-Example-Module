@@ -30,9 +30,9 @@ namespace ExampleJARVIS.Objects
             throw new System.NotImplementedException();
         }
 
-        public IEnumerable<WhatIBeInterestedIn> GetDesiredPacketType()
+        public IEnumerable<WhatIBeInterestedIn> WhatIBeInterestedIn
         {
-            return interests;
+            get { return interests; }
         }
     }
 }

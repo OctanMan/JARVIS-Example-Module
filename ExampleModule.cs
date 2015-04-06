@@ -18,8 +18,8 @@ namespace ExampleJARVIS
 
         public override void Load()
         {
-            Light light = new Light("Light1");
-            LightSwitch lightSwitch = new LightSwitch("LightSwitch");
+            Light light = new Light("Kitchen Light");
+            LightSwitch lightSwitch = new LightSwitch("Kitchen Light Switch");
 
             Register(light);
             Register(lightSwitch);
