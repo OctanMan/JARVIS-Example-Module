@@ -25,7 +25,7 @@ namespace ExampleJARVIS.Objects
             get { return identifier; }
         }
 
-        public void ReceivePacket(IPacket packet)
+        public void ReceivePacket(Packet packet)
         {
             throw new System.NotImplementedException();
         }

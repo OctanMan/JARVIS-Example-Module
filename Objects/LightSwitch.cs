@@ -24,7 +24,7 @@ namespace ExampleJARVIS.Objects
 
         public void SendPacket()
         {
-            IPacket packet = new Packet(this, "state", this.state);
+            Packet packet = new Packet(this, "state", this.state);
 
             throw new NotImplementedException();
         }

@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using JARVIS.Modules;
 using JARVIS.Knowledge;
 using JARVIS.Routing;
-using System.ComponentModel.Composition;
 using ExampleJARVIS.Objects;
 using System.Timers;
+using JARVIS.Evaluation;
 
 namespace ExampleJARVIS
 {
@@ -19,6 +19,7 @@ namespace ExampleJARVIS
         public override void Load()
         {
             Light light = new Light("Kitchen Light");
+
             LightSwitch lightSwitch = new LightSwitch("Kitchen Light Switch");
 
             Register(light);
