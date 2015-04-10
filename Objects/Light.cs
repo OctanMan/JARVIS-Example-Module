@@ -11,7 +11,7 @@ namespace ExampleJARVIS.Objects
     {
         UniqueIdentifier identifier;
 
-        WhatIBeInterestedIn[] interests = new WhatIBeInterestedIn[] { new TypeIBeInterestedIn(typeof(LightSwitch)) };
+        WhatIBeInterestedIn[] interests = new WhatIBeInterestedIn[] { new TypeIBeInterestedIn(typeof(Light)) };
 
         public bool State { get; private set; }
 
