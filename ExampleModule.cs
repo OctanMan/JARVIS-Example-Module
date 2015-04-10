@@ -7,7 +7,7 @@ using ExampleJARVIS.Objects;
 using System.Timers;
 using JARVIS.Evaluation;
 using System.Threading;
-using System.Windows;
+using JARVIS.Specification;
 
 namespace ExampleJARVIS
 {
@@ -25,10 +25,15 @@ namespace ExampleJARVIS
             Light light = new Light("Kitchen Light");
 
             lightSwitch = new LightSwitch("Kitchen Light Switch");
+            Spec<LightSwitch> turnedOn = new Spec<LightSwitch>(l => l.State);
+            var lightIsOn = new Condition(() => turnedOn.IsSatisfiedBy(lightSwitch));
+            Rule rule = new Rule("Rule #1", lightIsOn, new WhatIBeInterestedIn[]{new TypeIBeInterestedIn(typeof(LightSwitch))});
 
             Register(light);
             Register(lightSwitch);
+            Register(rule);
             OnCreateNewWindow(this);
+            
         }
 
         public override void Unload() { }
@@ -48,6 +53,11 @@ namespace ExampleJARVIS
             if (thing is IEvaluatable)
             {
                 evaluatables.Add(thing);
+            }
+
+            if(thing is IRule)
+            {
+                rules.Add(thing);
             }
         }
 

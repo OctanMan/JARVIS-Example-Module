@@ -10,7 +10,7 @@ namespace ExampleJARVIS.Objects
     {
         UniqueIdentifier identifier;
 
-        bool state = false;
+        public bool State { get; private set; }
 
         public LightSwitch(string name)
         {
@@ -27,7 +27,7 @@ namespace ExampleJARVIS.Objects
             //Packet packet = new Packet(this, "state", this.state);
             if (packetSendEvent != null)
             {
-                packetSendEvent(this, new PacketSendEventArgs(new Packet(this, "state", this.state)));
+                packetSendEvent(this, new PacketSendEventArgs(new Packet(this, "State", this.State)));
             }
         }
 
@@ -38,7 +38,7 @@ namespace ExampleJARVIS.Objects
 
         internal void flickSwitch(bool state)
         {
-            this.state = state;
+            this.State = state;
         }
 
         public event PacketSendEvent packetSendEvent;
