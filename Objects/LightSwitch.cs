@@ -36,7 +36,7 @@ namespace ExampleJARVIS.Objects
             throw new NotImplementedException();
         }
 
-        internal void flickSwitch(bool state)
+        internal void FlickSwitch(bool state)
         {
             this.State = state;
         }

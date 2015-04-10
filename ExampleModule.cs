@@ -27,13 +27,12 @@ namespace ExampleJARVIS
             lightSwitch = new LightSwitch("Kitchen Light Switch");
             Spec<LightSwitch> turnedOn = new Spec<LightSwitch>(l => l.State);
             var lightIsOn = new Condition(() => turnedOn.IsSatisfiedBy(lightSwitch));
-            Rule rule = new Rule("Rule #1", lightIsOn, new WhatIBeInterestedIn[]{new TypeIBeInterestedIn(typeof(LightSwitch))});
+            Rule rule = new Rule("Rule #1", lightIsOn, new WhatIBeInterestedIn[]{new TypeIBeInterestedIn(typeof(LightSwitch))}, new Packet(light, "State", true));
 
             Register(light);
             Register(lightSwitch);
             Register(rule);
             OnCreateNewWindow(this);
-            
         }
 
         public override void Unload() { }

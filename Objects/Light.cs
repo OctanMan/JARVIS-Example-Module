@@ -13,11 +13,13 @@ namespace ExampleJARVIS.Objects
 
         WhatIBeInterestedIn[] interests = new WhatIBeInterestedIn[] { new TypeIBeInterestedIn(typeof(LightSwitch)) };
 
+        public bool State { get; private set; }
+
         byte brightness = 0;
 
         public Light(string name)
         {
-            identifier = new UniqueIdentifier("name");
+            identifier = new UniqueIdentifier(name);
         }
 
         public UniqueIdentifier Identifier
@@ -27,7 +29,8 @@ namespace ExampleJARVIS.Objects
 
         public void ReceivePacket(Packet packet)
         {
-            throw new System.NotImplementedException();
+            Console.WriteLine("I AM A PACKET");
+            this.State = packet.Value;
         }
 
         public IEnumerable<WhatIBeInterestedIn> WhatIBeInterestedIn
