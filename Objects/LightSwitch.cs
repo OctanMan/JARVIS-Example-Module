@@ -24,10 +24,11 @@ namespace ExampleJARVIS.Objects
 
         public void SendPacket()
         {
-            Packet packet = new Packet(this, "state", this.state);
-            
-
-            //throw new NotImplementedException();
+            //Packet packet = new Packet(this, "state", this.state);
+            if (packetSendEvent != null)
+            {
+                packetSendEvent(this, new PacketSendEventArgs(new Packet(this, "state", this.state)));
+            }
         }
 
         public System.Collections.Generic.List<System.Type> GetDesiredPacketType()
@@ -35,9 +36,11 @@ namespace ExampleJARVIS.Objects
             throw new NotImplementedException();
         }
 
-        internal void flickSwitch()
+        internal void flickSwitch(bool state)
         {
-            this.state = !this.state;
+            this.state = state;
         }
+
+        public event PacketSendEvent packetSendEvent;
     }
 }

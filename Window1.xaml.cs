@@ -39,11 +39,13 @@ namespace ExampleJARVIS
         private void BtnLightSwitch_Checked(object sender, RoutedEventArgs e)
         {
            //TODO: Get a PacketSender to successfully send to the Router!
+            demoSwitch.flickSwitch(true);
             demoSwitch.SendPacket();
         }
 
         private void BtnLightSwitch_Unchecked(object sender, RoutedEventArgs e)
         {
+            demoSwitch.flickSwitch(false);
 
         }
 

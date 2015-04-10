@@ -13,6 +13,8 @@ namespace ExampleJARVIS
 {
     class ExampleModule : JModule
     {
+
+        LightSwitch lightSwitch;
         public ExampleModule()
         {
             name = "J.A.R.V.I.S. Example Module";
@@ -22,10 +24,11 @@ namespace ExampleJARVIS
         {
             Light light = new Light("Kitchen Light");
 
-            LightSwitch lightSwitch = new LightSwitch("Kitchen Light Switch");
+            lightSwitch = new LightSwitch("Kitchen Light Switch");
 
             Register(light);
             Register(lightSwitch);
+            OnCreateNewWindow(this);
         }
 
         public override void Unload() { }
@@ -48,7 +51,7 @@ namespace ExampleJARVIS
             }
         }
 
-        private void OnCreateNewWindow(object sender, RoutedEventArgs e)
+        private void OnCreateNewWindow(object sender)
         {
             Thread thread = new Thread(() =>
             {
@@ -57,10 +60,11 @@ namespace ExampleJARVIS
 
                 w.Closed += (sender2, e2) =>
                     w.Dispatcher.InvokeShutdown();
+                w.addDemoSwitch(lightSwitch);
 
                 System.Windows.Threading.Dispatcher.Run();
             });
-
+            thread.Name = "WindowsThread";
             thread.SetApartmentState(ApartmentState.STA);
             thread.Start();
         }
