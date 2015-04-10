@@ -49,7 +49,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\JARVIS\JARVIS.csproj">
+    <ProjectReference Include="..\JARVIS.csproj">
       <Project>{2d923013-4951-43a1-9029-27373ba56f2c}</Project>
       <Name>JARVIS</Name>
     </ProjectReference>

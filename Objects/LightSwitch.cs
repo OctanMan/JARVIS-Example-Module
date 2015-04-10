@@ -33,5 +33,7 @@ namespace ExampleJARVIS.Objects
         {
             throw new NotImplementedException();
         }
+
+        public event PacketSendEvent packetSendEvent;
     }
 }
