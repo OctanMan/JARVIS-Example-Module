@@ -25,13 +25,19 @@ namespace ExampleJARVIS.Objects
         public void SendPacket()
         {
             Packet packet = new Packet(this, "state", this.state);
+            
 
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
         }
 
         public System.Collections.Generic.List<System.Type> GetDesiredPacketType()
         {
             throw new NotImplementedException();
+        }
+
+        internal void flickSwitch()
+        {
+            this.state = !this.state;
         }
     }
 }
