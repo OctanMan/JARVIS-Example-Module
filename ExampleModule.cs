@@ -67,6 +67,8 @@ namespace ExampleJARVIS
                 Window1 w = new Window1();
                 w.Show();
 
+                //NOTE: Closing works but shuts down the entire application - including JARVIS' Core/Router!
+                // Really need a way of closing just this window's thread (for the lightswitch) and shutdown JARVIS separately 
                 w.Closed += (sender2, e2) =>
                     w.Dispatcher.InvokeShutdown();
                 w.addDemoSwitch(lightSwitch);
