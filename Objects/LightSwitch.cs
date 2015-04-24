@@ -14,7 +14,7 @@ namespace ExampleJARVIS.Objects
 
         public LightSwitch(string name)
         {
-           identifier = new UniqueIdentifier(name);
+           identifier = new UniqueIdentifier(this, name);
         }
 
         public UniqueIdentifier Identifier

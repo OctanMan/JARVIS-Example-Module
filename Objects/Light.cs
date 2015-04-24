@@ -19,7 +19,7 @@ namespace ExampleJARVIS.Objects
 
         public Light(string name)
         {
-            identifier = new UniqueIdentifier(name);
+            identifier = new UniqueIdentifier(this, name);
         }
 
         public UniqueIdentifier Identifier
@@ -29,7 +29,7 @@ namespace ExampleJARVIS.Objects
 
         public void ReceivePacket(Packet packet)
         {
-            Console.WriteLine("I AM A PACKET");
+            Console.WriteLine("THE LIGHT IS... TURNED ON...");
             this.State = packet.Value;
         }
 
