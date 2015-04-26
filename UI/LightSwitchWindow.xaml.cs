@@ -17,36 +17,30 @@ using System.Windows.Shapes;
 namespace ExampleJARVIS
 {
     /// <summary>
-    /// This Window is deigned to allow some control for the developer to manually send
-    /// Packets from the example. This is better than having a seperate thread that simulates
-    /// a simple individual who delights in flicking switches all day
+    /// This Window is deigned to allow some control for the developer to manually send Packets from the example.
+    /// This is perhaps more intuitive than having a seperate thread that simulates a simple-minded individual 
+    /// who delights in flicking switches all day!
     /// </summary>
-    public partial class Window1 : Window
+    public partial class LightSwitchWindow : Window
     {
-        private LightSwitch demoSwitch;
+        private LightSwitch mySwitch;
         
-        public Window1()
+        public LightSwitchWindow(LightSwitch lightSwitch)
         {
+            mySwitch = lightSwitch;
             InitializeComponent();
-        }
- 
-        internal void addDemoSwitch(LightSwitch switchForDemo)
-        {
-            //A quick and dumb way to get a LightSwitch Reference
-            demoSwitch = switchForDemo;
         }
 
         private void BtnLightSwitch_Checked(object sender, RoutedEventArgs e)
         {
-           //TODO: Get a PacketSender to successfully send to the Router!
-            demoSwitch.FlickSwitch(true);
-            demoSwitch.SendPacket();
+            mySwitch.FlickSwitch(true);
+            BtnLightSwitch.Content = "On";
         }
 
         private void BtnLightSwitch_Unchecked(object sender, RoutedEventArgs e)
         {
-            demoSwitch.FlickSwitch(false);
-
+            mySwitch.FlickSwitch(false);
+            BtnLightSwitch.Content = "Off";
         }
 
 

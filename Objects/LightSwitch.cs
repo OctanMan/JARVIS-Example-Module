@@ -3,26 +3,32 @@ using JARVIS.Knowledge;
 using JARVIS.Routing;
 using JARVIS;
 using JARVIS.Evaluation;
+using System.Threading;
 
 namespace ExampleJARVIS.Objects
 {
-    class LightSwitch : IEvaluatable, IPacketSender
+    public class LightSwitch : IEvaluatable, IPacketSender
     {
-        UniqueIdentifier identifier;
+        private LightSwitchWindow myUI;
+
+        private UniqueIdentifier myIdentifier;
+
+        public event PacketSendEvent packetSendEvent;
 
         public bool State { get; private set; }
 
         public LightSwitch(string name)
         {
-           identifier = new UniqueIdentifier(this, name);
+            myIdentifier = new UniqueIdentifier(this, name);
+            CreateNewWindow();
         }
 
         public UniqueIdentifier Identifier
         {
-            get { return identifier; }
+            get { return myIdentifier; }
         }
 
-        public void SendPacket()
+        private void SendPacket()
         {
             //Packet packet = new Packet(this, "state", this.state);
             if (packetSendEvent != null)
@@ -31,17 +37,29 @@ namespace ExampleJARVIS.Objects
             }
         }
 
-        public System.Collections.Generic.List<System.Type> GetDesiredPacketType()
-        {
-            throw new NotImplementedException();
-        }
-
-
         internal void FlickSwitch(bool state)
         {
             this.State = state;
+            SendPacket();
         }
 
-        public event PacketSendEvent packetSendEvent;
+        private void CreateNewWindow()
+        {
+            Thread thread = new Thread(() =>
+            {
+                myUI =  new LightSwitchWindow(this);
+                myUI.Show();
+
+                //NOTE: Closing works but shuts down the entire application - including JARVIS' Core/Router!
+                // Really need a way of closing just this window's thread (for the lightswitch) and shutdown JARVIS separately 
+                myUI.Closed += (sender, e) =>
+                    myUI.Dispatcher.InvokeShutdown();
+
+                System.Windows.Threading.Dispatcher.Run();
+            });
+            thread.Name = "LightSwitch UI Thread";
+            thread.SetApartmentState(ApartmentState.STA);
+            thread.Start();
+        }
     }
 }
