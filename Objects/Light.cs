@@ -11,7 +11,7 @@ namespace ExampleJARVIS.Objects
     {
         UniqueIdentifier identifier;
 
-        WhatIBeInterestedIn[] interests = new WhatIBeInterestedIn[] { new TypeIBeInterestedIn(typeof(Light)) };
+        EvaluationPreference[] interests = new EvaluationPreference[] { new TypePreference(typeof(Light)) };
 
         public bool State { get; private set; }
 
@@ -33,7 +33,7 @@ namespace ExampleJARVIS.Objects
             this.State = packet.Value;
         }
 
-        public IEnumerable<WhatIBeInterestedIn> WhatIBeInterestedIn
+        public IEnumerable<EvaluationPreference> WhatIBeInterestedIn
         {
             get { return interests; }
         }
