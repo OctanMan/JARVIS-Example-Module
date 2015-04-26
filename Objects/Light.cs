@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using JARVIS.Knowledge;
 using JARVIS.Routing;
-using JARVIS;
 using JARVIS.Evaluation;
 using System.Threading;
-using System.ComponentModel;
+using JARVIS.Evaluation.Preferences;
 
 namespace ExampleJARVIS.Objects
 {
@@ -13,13 +11,9 @@ namespace ExampleJARVIS.Objects
     {
         private LightWindow myUI;
 
-<<<<<<< Updated upstream
-        EvaluationPreference[] interests = new EvaluationPreference[] { new TypePreference(typeof(Light)) };
-=======
-        private UniqueIdentifier identifier;
+        private EvaluationPreference[] interests = new EvaluationPreference[] { new TypePreference(typeof(Light)) };
 
-        private WhatIBeInterestedIn[] interests = new WhatIBeInterestedIn[] { new TypeIBeInterestedIn(typeof(Light)) };
->>>>>>> Stashed changes
+        private UniqueIdentifier identifier;
 
         public bool State { get; private set; }
 
@@ -49,7 +43,6 @@ namespace ExampleJARVIS.Objects
         {
             get { return interests; }
         }
-
 
 
         private void CreateNewWindow()
