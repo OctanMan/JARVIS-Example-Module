@@ -4,6 +4,8 @@ using JARVIS.Routing;
 using JARVIS.Evaluation;
 using JARVIS.Specification;
 using ExampleJARVIS.Objects;
+using JARVIS.Evaluation.Preferences;
+using System.Collections.Generic;
 
 namespace ExampleJARVIS
 {
@@ -36,7 +38,9 @@ namespace ExampleJARVIS
             LightSwitch lightSwitch = new LightSwitch("Kitchen Light Switch");
 
 
-            //---Now for the fun part---
+            //---Now for the fun part - Rules---
+
+            //Using JARVIS' flexible, built-in Rule system, just follow these 4 steps:
 
             //1. Define a Specification - encapsulate the logic of a LightSwitch in the 'On' state into a Spec<T> object
             Spec<LightSwitch> isTurnedOn = new Spec<LightSwitch>(ls => ls.State == true);
@@ -48,14 +52,21 @@ namespace ExampleJARVIS
             Packet satisfactionPacket = new Packet(light, "State", true);
 
             //4. Compose the Condition and Packet above into a new Rule with a highly verbose name
-            Rule rule = new Rule("Turn the kitchen light on when the kitchen light switch is pressed", lightSwitchIsOn, satisfactionPacket);
+            Rule JarvisRule = new Rule("Turn the kitchen light on when the kitchen light switch is pressed on", lightSwitchIsOn, satisfactionPacket);
+
+
+            //Alternitavely, you may wish to create a custom 'hard-coded' IRule yourself:
+
+            //This one will evaluate if the LightSwitch is turned off. See the class below.
+            MyCustomRule myRule = new MyCustomRule(lightSwitch, light);
 
 
             //---And, finally, register the domain objects and the rule that governs their behavior---
 
             Register(light);
             Register(lightSwitch);
-            Register(rule);
+            Register(JarvisRule);
+            Register(myRule);
         }
 
         public override void Unload() { }
@@ -85,6 +96,53 @@ namespace ExampleJARVIS
             if(thing is IRule)
             {
                 rules.Add(thing);
+            }
+        }
+
+        /// <summary>
+        /// Example of a custom IRule implementation
+        /// This one checks if a LightSwitch is in the 'Off' state
+        /// </summary>
+        public class MyCustomRule : IRule
+        {
+            private LightSwitch mySwitch;
+            private Packet mySatisfiedPacket;
+            private List<InstancePreference> myPreferences;
+
+            public MyCustomRule(LightSwitch lightSwitch, Light light)
+            {
+                mySwitch = lightSwitch;
+                mySatisfiedPacket = new Packet(light, "State", false);
+                myPreferences = new List<InstancePreference>() { new InstancePreference(mySwitch) };
+            }
+
+            /// <summary>
+            /// Returns true if the LightSwitch is turned off
+            /// </summary>
+            public bool IsSatisfied
+            {
+                get
+                {
+                    if (mySwitch.State == false)
+                        return true;
+                    else return false;
+                }
+            }
+
+            public Packet PacketToSendIfSatisfied
+            {
+                get
+                {
+                    return mySatisfiedPacket;
+                }
+            }
+
+            public IEnumerable<EvaluationPreference> WhatIBeInterestedIn
+            {
+                get
+                {
+                    return myPreferences;
+                }
             }
         }
     }
