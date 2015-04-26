@@ -32,7 +32,7 @@ namespace ExampleJARVIS
             //---First, create the objects in the Kitchen domain---
 
             //Create a Light
-            Light light = new Light("Kitchen Light");
+            LightBulb light = new LightBulb("Kitchen Light");
 
             //Create a LightSwitch
             LightSwitch lightSwitch = new LightSwitch("Kitchen Light Switch");
@@ -109,7 +109,7 @@ namespace ExampleJARVIS
             private Packet mySatisfiedPacket;
             private List<InstancePreference> myPreferences;
 
-            public MyCustomRule(LightSwitch lightSwitch, Light light)
+            public MyCustomRule(LightSwitch lightSwitch, LightBulb light)
             {
                 mySwitch = lightSwitch;
                 mySatisfiedPacket = new Packet(light, "State", false);

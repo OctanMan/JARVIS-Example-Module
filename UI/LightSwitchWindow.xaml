@@ -5,11 +5,11 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
              d:DesignHeight="100" d:DesignWidth="100"
-        Width="150" Height="150">
+            Width="250" Height="150" Title="LightSwitch">
     
     <Grid>
         <ToggleButton x:Name="BtnLightSwitch" 
-                      Width="100" Height="100" Content="Light Switch" 
+                      Width="100" Height="100" Content="Click Me!" 
                       Checked="BtnLightSwitch_Checked" Unchecked="BtnLightSwitch_Unchecked"/>    
     </Grid>
 </Window>

@@ -7,11 +7,11 @@ using JARVIS.Evaluation.Preferences;
 
 namespace ExampleJARVIS.Objects
 {
-    public class Light  : IEvaluatable, IPacketReceiver
+    public class LightBulb  : IEvaluatable, IPacketReceiver
     {
-        private LightWindow myUI;
+        private LightBulbWindow myUI;
 
-        private EvaluationPreference[] interests = new EvaluationPreference[] { new TypePreference(typeof(Light)) };
+        private EvaluationPreference[] interests = new EvaluationPreference[] { new TypePreference(typeof(LightBulb)) };
 
         private UniqueIdentifier identifier;
 
@@ -19,7 +19,7 @@ namespace ExampleJARVIS.Objects
 
         byte brightness = 0;
 
-        public Light(string name)
+        public LightBulb(string name)
         {
             identifier = new UniqueIdentifier(this, name);
             CreateNewWindow();
@@ -49,7 +49,7 @@ namespace ExampleJARVIS.Objects
         {
             Thread thread = new Thread(() =>
             {
-                myUI = new LightWindow();
+                myUI = new LightBulbWindow();
                 myUI.Show();
 
                 //NOTE: Closing works but shuts down the entire application - including JARVIS' Core/Router!

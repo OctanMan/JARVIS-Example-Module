@@ -20,10 +20,10 @@ namespace ExampleJARVIS
     /// This Window is deigned to graphically display what's going on in a nicer way than the console.
     /// It's not really the best separation of concerns to have the Model (Light) update the View though...
     /// </summary>
-    public partial class LightWindow : Window
+    public partial class LightBulbWindow : Window
     {
         
-        public LightWindow()
+        public LightBulbWindow()
         {
             InitializeComponent();
         }
