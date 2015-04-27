@@ -23,26 +23,39 @@ namespace ExampleJARVIS
     /// </summary>
     public partial class LightSwitchWindow : Window
     {
-        private LightSwitch mySwitch;
+        internal event EventHandler<SwitchFlickedEventArgs> SwitchFlicked;
         
-        public LightSwitchWindow(LightSwitch lightSwitch)
+        public LightSwitchWindow()
         {
-            mySwitch = lightSwitch;
             InitializeComponent();
         }
 
         private void BtnLightSwitch_Checked(object sender, RoutedEventArgs e)
         {
-            mySwitch.FlickSwitch(true);
-            BtnLightSwitch.Content = "On";
+            if (SwitchFlicked != null)
+            {
+                SwitchFlicked(this, new SwitchFlickedEventArgs(true));
+                BtnLightSwitch.Content = "On";
+            }
         }
 
         private void BtnLightSwitch_Unchecked(object sender, RoutedEventArgs e)
         {
-            mySwitch.FlickSwitch(false);
-            BtnLightSwitch.Content = "Off";
+            if (SwitchFlicked != null)
+            {
+                SwitchFlicked(this, new SwitchFlickedEventArgs(false));
+                BtnLightSwitch.Content = "Off";
+            }
         }
+      
+    }
 
-
+    internal class SwitchFlickedEventArgs :EventArgs
+    {
+        public readonly bool SwitchState;
+        internal SwitchFlickedEventArgs(bool State)
+        {
+            this.SwitchState = State;
+        }
     }
 }

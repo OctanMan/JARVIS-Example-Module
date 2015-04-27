@@ -30,16 +30,15 @@ namespace ExampleJARVIS.Objects
 
         private void SendPacket()
         {
-            //Packet packet = new Packet(this, "state", this.state);
             if (packetSendEvent != null)
             {
                 packetSendEvent(this, new PacketSendEventArgs(new Packet(this, "State", this.State)));
             }
         }
 
-        internal void FlickSwitch(bool state)
+        internal void OnSwitchFlicked(object sender, SwitchFlickedEventArgs e)
         {
-            this.State = state;
+            this.State = e.SwitchState;
             SendPacket();
         }
 
@@ -47,7 +46,8 @@ namespace ExampleJARVIS.Objects
         {
             Thread thread = new Thread(() =>
             {
-                myUI =  new LightSwitchWindow(this);
+                myUI =  new LightSwitchWindow();
+                myUI.SwitchFlicked += OnSwitchFlicked;
                 myUI.Show();
 
                 //NOTE: Closing works but shuts down the entire application - including JARVIS' Core/Router!
