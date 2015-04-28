@@ -17,7 +17,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\bin\Debug\plugins\</OutputPath>
+    <OutputPath>..\..\Core\bin\Debug\plugins\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -66,7 +66,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\JARVIS.csproj">
+    <ProjectReference Include="..\Core\JARVIS.csproj">
       <Project>{2d923013-4951-43a1-9029-27373ba56f2c}</Project>
       <Name>JARVIS</Name>
     </ProjectReference>

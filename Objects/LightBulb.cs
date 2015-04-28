@@ -32,7 +32,7 @@ namespace ExampleJARVIS.Objects
 
         public void ReceivePacket(Packet packet)
         {
-            Console.WriteLine(this.identifier.handle+" received a Packet - Value = "+packet.Value);
+            Console.WriteLine(this.identifier.Handle+" received a Packet - Value = "+packet.Value);
             this.State = packet.Value;
 
             //May want to implement MVC/MVVM properly but this is simple for now
